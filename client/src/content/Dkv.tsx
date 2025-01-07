@@ -1,13 +1,13 @@
-import Sidebar, { SidebarItem } from "../components/sidebar";
-import { Gauge, FolderCode, Network, TvMinimalPlay, Video } from "lucide-react";
+import Sidebar, { SidebarItem } from "../components/sidebar"
+import { Gauge, FolderCode, Network, TvMinimalPlay, Video } from "lucide-react"
 import { Link } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dkv() {
   return (
     <div className="flex">
       <Sidebar>
         <Link to="/dashboard">
-          <SidebarItem icon={<Gauge size={20} />} text="Dashboard" active />
+          <SidebarItem icon={<Gauge size={20} />} text="Dashboard" />
         </Link>
 
         <Link to="/rpl">
@@ -19,7 +19,7 @@ export default function Dashboard() {
         </Link>
 
         <Link to="/dkv">
-          <SidebarItem icon={<TvMinimalPlay size={20} />} text="DKV" />
+          <SidebarItem icon={<TvMinimalPlay size={20} />} text="DKV" active />
         </Link>
 
         <Link to="/pspt">
@@ -28,8 +28,8 @@ export default function Dashboard() {
       </Sidebar>
 
       <div className="flex-1 p-4">
-        <h1>Dashboard Content</h1>
+        <h1>DKV Content</h1>
       </div>
     </div>
-  );
+  )
 }
