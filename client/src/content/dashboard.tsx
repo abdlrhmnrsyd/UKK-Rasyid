@@ -11,8 +11,47 @@ import {
   WrenchIcon
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Doughnut } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+
+// Register ChartJS components
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend
+);
 
 export default function Dashboard() {
+  // Add chart data configuration
+  const getChartData = (working: number, broken: number, maintenance: number) => ({
+    labels: ['Berfungsi', 'Rusak', 'Maintenance'],
+    datasets: [
+      {
+        data: [working, broken, maintenance],
+        backgroundColor: [
+          'rgb(34, 197, 94)', // green
+          'rgb(239, 68, 68)', // red
+          'rgb(234, 179, 8)',  // yellow
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+    },
+    maintainAspectRatio: false,
+  };
+
   return (
     <div className="flex">
       <Sidebar>
@@ -50,6 +89,9 @@ export default function Dashboard() {
               </div>
               <span className="text-sm text-gray-500">Laboratorium 1</span>
             </div>
+            <div className="h-48 mb-4">
+              <Doughnut data={getChartData(28, 2, 1)} options={chartOptions} />
+            </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
@@ -78,6 +120,9 @@ export default function Dashboard() {
                 <h2 className="text-xl font-semibold">TKJ</h2>
               </div>
               <span className="text-sm text-gray-500">Laboratorium 2</span>
+            </div>
+            <div className="h-48 mb-4">
+              <Doughnut data={getChartData(32, 3, 2)} options={chartOptions} />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -108,6 +153,9 @@ export default function Dashboard() {
               </div>
               <span className="text-sm text-gray-500">Laboratorium 3</span>
             </div>
+            <div className="h-48 mb-4">
+              <Doughnut data={getChartData(23, 2, 1)} options={chartOptions} />
+            </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
@@ -136,6 +184,9 @@ export default function Dashboard() {
                 <h2 className="text-xl font-semibold">PSPT</h2>
               </div>
               <span className="text-sm text-gray-500">Laboratorium 4</span>
+            </div>
+            <div className="h-48 mb-4">
+              <Doughnut data={getChartData(25, 3, 2)} options={chartOptions} />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
