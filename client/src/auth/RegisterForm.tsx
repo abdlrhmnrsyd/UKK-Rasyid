@@ -18,21 +18,28 @@ const RegisterForm: React.FC = () => {
             if (!name || !username || !password || !confirmPassword) {
                 throw new Error('Semua field harus diisi');
             }
-
+    
             if (password.length < 6) {
                 throw new Error('Password harus minimal 6 karakter');
             }
-
+    
             if (password !== confirmPassword) {
                 throw new Error('Password tidak cocok!');
             }
-
+    
+            // Tambahkan panggilan API ke backend
+            const response = await axios.post('http://localhost:5000/register', {
+                name,
+                username,
+                password
+            });
+    
+            // Jika berhasil, tampilkan alert sukses
             Swal.fire({
                 title: 'Berhasil!',
                 text: 'Registrasi akun berhasil dilakukan',
                 icon: 'success',
                 confirmButtonText: 'OK'
-        
             }).then(() => {
                 // Reset form setelah user klik OK
                 setName('');
