@@ -1,10 +1,7 @@
 
 import '../index.css';
 
-// Add proper typing for the context
 
-
-// Sidebar component
 export default function Sidebar({ children }: { children: React.ReactNode }) {
   return (
     <aside className="h-screen">

@@ -27,12 +27,6 @@ const RegisterForm: React.FC = () => {
                 throw new Error('Password tidak cocok!');
             }
 
-            const response = await axios.post('http://localhost:5000/register', {
-                name,
-                username,
-                password
-            });
-
             Swal.fire({
                 title: 'Berhasil!',
                 text: 'Registrasi akun berhasil dilakukan',
