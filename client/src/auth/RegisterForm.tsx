@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm: React.FC = () => {
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -41,12 +43,13 @@ const RegisterForm: React.FC = () => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             }).then(() => {
-                // Reset form setelah user klik OK
+                // Reset form dan navigate ke login
                 setName('');
                 setUsername('');
                 setPassword('');
                 setConfirmPassword('');
                 setError('');
+                navigate('/login');
             });
 
         } catch (err) {
@@ -74,6 +77,13 @@ const RegisterForm: React.FC = () => {
 
     return (
         <div className="max-w-md mx-auto mt-10">
+            <button
+                onClick={() => navigate(-1)}
+                className="mb-4 px-4 py-2 text-blue-500 hover:text-blue-600 flex items-center"
+            >
+                <span>← Back</span>
+            </button>
+            
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md">
                 <h2 className="text-2xl font-semibold mb-6 text-center">Register</h2>
                 
