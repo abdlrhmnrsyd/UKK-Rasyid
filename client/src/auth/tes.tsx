@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    // Contoh log untuk username dan password
     console.log("Username:", username, "Password:", password);
 
-   
-    try {
-      navigate("/dashboard");
-    } catch (error) {
-      
-      alert("Login gagal!");
-    }
+    // Alert sebagai placeholder untuk logika login
+    alert("Login berhasil!");
   };
 
   return (
     <div className="bg-white dark:bg-gray-900">
       <div className="flex justify-center h-screen">
-    
+        {/* Bagian kiri dengan gambar */}
         <div
           className="hidden bg-cover lg:block lg:w-2/3"
           style={{
@@ -34,7 +28,7 @@ const LoginPage: React.FC = () => {
           <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
             <div>
               <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                SMKN 2 Padang Panjang
+                Meraki UI
               </h2>
               <p className="max-w-xl mt-3 text-gray-300">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. In autem
@@ -45,14 +39,14 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
 
-       
+        {/* Bagian kanan dengan form login */}
         <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
           <div className="flex-1">
             <div className="text-center">
               <div className="flex justify-center mx-auto">
-              <img
-                  className="w-auto h-12 sm:h-14"
-                  src="./../../public/images/logo.png"
+                <img
+                  className="w-auto h-7 sm:h-8"
+                  src="https://merakiui.com/images/logo.svg"
                   alt="Logo"
                 />
               </div>
@@ -64,10 +58,11 @@ const LoginPage: React.FC = () => {
             <div className="mt-8">
               <form
                 onSubmit={handleSubmit}
-                className=" dark:bg-gray-900 p-8 rounded shadow-md"
+                className="bg-white p-8 rounded shadow-md"
               >
+                <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-white">Username</label>
+                  <label className="block text-sm font-medium">Username</label>
                   <input
                     type="text"
                     className="w-full px-4 py-2 mt-2 border rounded-md"
@@ -78,7 +73,7 @@ const LoginPage: React.FC = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-white">Password</label>
+                  <label className="block text-sm font-medium">Password</label>
                   <input
                     type="password"
                     className="w-full px-4 py-2 mt-2 border rounded-md"
@@ -98,7 +93,7 @@ const LoginPage: React.FC = () => {
               <p className="mt-6 text-sm text-center text-gray-400">
                 Don't have an account yet?{" "}
                 <a
-                  href="register"
+                  href="#"
                   className="text-blue-500 focus:outline-none focus:underline hover:underline"
                 >
                   Sign up
