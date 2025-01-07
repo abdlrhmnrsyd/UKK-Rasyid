@@ -5,18 +5,50 @@ const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    username: '',
+    password: ''
+  });
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setErrors({ username: '', password: '' });
 
-    console.log("Username:", username, "Password:", password);
-
-   
     try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+      console.log('Response status:', response.status);
+      console.log('Response data:', data);
+
+      if (!response.ok) {
+        if (data.field === 'username') {
+          setErrors(prev => ({ ...prev, username: data.message }));
+        } else if (data.field === 'password') {
+          setErrors(prev => ({ ...prev, password: data.message }));
+        } else {
+          setErrors({
+            username: 'Invalid username or password',
+            password: 'Invalid username or password'
+          });
+        }
+        return;
+      }
+
+      localStorage.setItem('token', data.token);
       navigate("/dashboard");
-    } catch (error) {
-      
-      alert("Login gagal!");
+    } catch (error: any) {
+      console.error('Login error:', error.message);
+      setErrors({
+        username: 'Login failed',
+        password: 'Login failed'
+      });
     }
   };
 
@@ -70,23 +102,33 @@ const LoginPage: React.FC = () => {
                   <label className="block text-sm font-medium text-white">Username</label>
                   <input
                     type="text"
-                    className="w-full px-4 py-2 mt-2 border rounded-md"
+                    className={`w-full px-4 py-2 mt-2 border rounded-md ${
+                      errors.username ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     placeholder="Enter Username"
                     required
                   />
+                  {errors.username && (
+                    <p className="mt-1 text-sm text-red-500">{errors.username}</p>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-white">Password</label>
                   <input
                     type="password"
-                    className="w-full px-4 py-2 mt-2 border rounded-md"
+                    className={`w-full px-4 py-2 mt-2 border rounded-md ${
+                      errors.password ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Your Password"
                     required
                   />
+                  {errors.password && (
+                    <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                  )}
                 </div>
                 <button
                   type="submit"
