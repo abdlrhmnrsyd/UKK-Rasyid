@@ -10,7 +10,7 @@ import {
   CheckCircle2,
   WrenchIcon
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Doughnut } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -27,6 +27,8 @@ ChartJS.register(
 );
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   // Add chart data configuration
   const getChartData = (working: number, broken: number, maintenance: number) => ({
     labels: ['Berfungsi', 'Rusak', 'Maintenance'],
@@ -50,7 +52,14 @@ export default function Dashboard() {
       },
     },
     maintainAspectRatio: false,
+    onClick: () => {}, // This is needed to enable click events
   };
+
+  // Add click handlers for each department
+  const handleRPLClick = () => navigate('/rpl');
+  const handleTKJClick = () => navigate('/tkj');
+  const handleDKVClick = () => navigate('/dkv');
+  const handlePSPTClick = () => navigate('/pspt');
 
   return (
     <div className="flex">
@@ -81,7 +90,7 @@ export default function Dashboard() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* RPL Card */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={handleRPLClick}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <FolderCode className="h-8 w-8 text-blue-500 mr-3" />
@@ -90,7 +99,10 @@ export default function Dashboard() {
               <span className="text-sm text-gray-500">Laboratorium 1</span>
             </div>
             <div className="h-48 mb-4">
-              <Doughnut data={getChartData(28, 2, 1)} options={chartOptions} />
+              <Doughnut 
+                data={getChartData(28, 2, 1)} 
+                options={{...chartOptions, onClick: handleRPLClick}} 
+              />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -113,7 +125,7 @@ export default function Dashboard() {
           </div>
 
           {/* TKJ Card */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={handleTKJClick}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <Network className="h-8 w-8 text-green-500 mr-3" />
@@ -122,7 +134,10 @@ export default function Dashboard() {
               <span className="text-sm text-gray-500">Laboratorium 2</span>
             </div>
             <div className="h-48 mb-4">
-              <Doughnut data={getChartData(32, 3, 2)} options={chartOptions} />
+              <Doughnut 
+                data={getChartData(32, 3, 2)} 
+                options={{...chartOptions, onClick: handleTKJClick}} 
+              />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -145,7 +160,7 @@ export default function Dashboard() {
           </div>
 
           {/* DKV Card */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={handleDKVClick}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <TvMinimalPlay className="h-8 w-8 text-purple-500 mr-3" />
@@ -154,7 +169,10 @@ export default function Dashboard() {
               <span className="text-sm text-gray-500">Laboratorium 3</span>
             </div>
             <div className="h-48 mb-4">
-              <Doughnut data={getChartData(23, 2, 1)} options={chartOptions} />
+              <Doughnut 
+                data={getChartData(23, 2, 1)} 
+                options={{...chartOptions, onClick: handleDKVClick}} 
+              />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
@@ -177,7 +195,7 @@ export default function Dashboard() {
           </div>
 
           {/* PSPT Card */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={handlePSPTClick}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center">
                 <Video className="h-8 w-8 text-orange-500 mr-3" />
@@ -186,7 +204,10 @@ export default function Dashboard() {
               <span className="text-sm text-gray-500">Laboratorium 4</span>
             </div>
             <div className="h-48 mb-4">
-              <Doughnut data={getChartData(25, 3, 2)} options={chartOptions} />
+              <Doughnut 
+                data={getChartData(25, 3, 2)} 
+                options={{...chartOptions, onClick: handlePSPTClick}} 
+              />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
