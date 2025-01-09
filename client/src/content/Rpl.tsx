@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Sidebar, { SidebarItem } from "../components/sidebar";
-import { Gauge, FolderCode, Network, TvMinimalPlay, Video } from "lucide-react";
+import { Gauge, FolderCode, Network, TvMinimalPlay, Video, Edit, Trash } from "lucide-react";
 
 export default function Rpl() {
   // State untuk data RPL dan form input
@@ -243,23 +243,25 @@ export default function Rpl() {
               {rplData.map((rpl, index) => (
                 <tr key={rpl.id} className="border-b hover:bg-gray-100">
                   <td className="border px-4 py-2">{index + 1}</td>
-                  <td className="border px-4 py-2">{rpl.nama_komputer}</td>
-                  <td className="border px-4 py-2">{rpl.ip_address}</td>
-                  <td className="border px-4 py-2">{rpl.brand}</td>
-                  <td className="border px-4 py-2">{rpl.lokasi}</td>
-                  <td className="border px-4 py-2">{rpl.status}</td>
+                  <td className="border px-4 py-2">{rpl.nama_komputer.toUpperCase()}</td>
+                  <td className="border px-4 py-2">{rpl.ip_address.toUpperCase()}</td>
+                  <td className="border px-4 py-2">{rpl.brand.toUpperCase()}</td>
+                  <td className="border px-4 py-2">{rpl.lokasi.toUpperCase()}</td>
+                  <td className="border px-4 py-2">{rpl.status.toUpperCase()}</td>
                   <td className="border px-4 py-2">
                     <button
                       onClick={() => handleEdit(rpl)}
                       className="text-blue-500 hover:underline"
                     >
-                      Edit
+                      <Edit className="h-5 w-5 mr-1" />
+                    
                     </button>
                     <button
                       onClick={() => handleDelete(rpl.id)}
                       className="text-red-500 hover:underline ml-2"
                     >
-                      Hapus
+                      <Trash className="h-5 w-5 mr-1" />
+                      
                     </button>
                   </td>
                 </tr>
