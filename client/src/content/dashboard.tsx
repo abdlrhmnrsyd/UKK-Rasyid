@@ -18,6 +18,8 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // Register ChartJS components
 ChartJS.register(
@@ -28,13 +30,165 @@ ChartJS.register(
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const [rplStatusCount, setRplStatusCount] = useState({ working: 0, broken: 0, maintenance: 0 });
+  const [tkjStatusCount, setTkjStatusCount] = useState({ working: 0, broken: 0, maintenance: 0 });
+  const [dkvStatusCount, setDkvStatusCount] = useState({ working: 0, broken: 0, maintenance: 0 });
+  const [psptStatusCount, setPsptStatusCount] = useState({ working: 0, broken: 0, maintenance: 0 });
+  const [totalPC, setTotalPC] = useState(0);
 
-  // Add chart data configuration
-  const getChartData = (working: number, broken: number, maintenance: number) => ({
+  // Fetch RPL status data
+  useEffect(() => {
+    const fetchRplStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/rpl");
+        if (response.data.length === 0) {
+          console.error("Data RPL kosong");
+          return; // Menghentikan eksekusi jika data kosong
+        }
+        calculateRplStatus(response.data);
+        setTotalPC(response.data.length);
+      } catch (error) {
+        console.error("Error fetching RPL data", error);
+      }
+    };
+    fetchRplStatus();
+  }, []);
+
+  // Fetch TKJ status data
+  useEffect(() => {
+    const fetchTkjStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/tkj");
+        if (response.data.length === 0) {
+          console.error("Data TKJ kosong");
+          return; // Menghentikan eksekusi jika data kosong
+        }
+        calculateTkjStatus(response.data);
+      } catch (error) {
+        console.error("Error fetching TKJ data", error);
+      }
+    };
+    fetchTkjStatus();
+  }, []);
+
+  // Fetch DKV status data
+  useEffect(() => {
+    const fetchDkvStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/dkv");
+        if (response.data.length === 0) {
+          console.error("Data DKV kosong");
+          return; // Menghentikan eksekusi jika data kosong
+        }
+        calculateDkvStatus(response.data);
+      } catch (error) {
+        console.error("Error fetching DKV data", error);
+      }
+    };
+    fetchDkvStatus();
+  }, []);
+
+  // Fetch PSPT status data
+  useEffect(() => {
+    const fetchPsptStatus = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/pspt");
+        if (response.data.length === 0) {
+          console.error("Data PSPT kosong");
+          return; // Menghentikan eksekusi jika data kosong
+        }
+        calculatePsptStatus(response.data);
+      } catch (error) {
+        console.error("Error fetching PSPT data", error);
+      }
+    };
+    fetchPsptStatus();
+  }, []);
+
+  // Calculate status for RPL
+  const calculateRplStatus = (data: any[]) => {
+    const working = data.filter(comp => comp.status === "berfungsi").length;
+    const broken = data.filter(comp => comp.status === "rusak").length;
+    const maintenance = data.filter(comp => comp.status === "maintenance").length;
+    setRplStatusCount({ working, broken, maintenance });
+  };
+
+  // Calculate status for TKJ
+  const calculateTkjStatus = (data: any[]) => {
+    const working = data.filter(comp => comp.status === "berfungsi").length;
+    const broken = data.filter(comp => comp.status === "rusak").length;
+    const maintenance = data.filter(comp => comp.status === "maintenance").length;
+    setTkjStatusCount({ working, broken, maintenance });
+  };
+
+  // Calculate status for DKV
+  const calculateDkvStatus = (data: any[]) => {
+    const working = data.filter(comp => comp.status === "berfungsi").length;
+    const broken = data.filter(comp => comp.status === "rusak").length;
+    const maintenance = data.filter(comp => comp.status === "maintenance").length;
+    setDkvStatusCount({ working, broken, maintenance });
+  };
+
+  // Calculate status for PSPT
+  const calculatePsptStatus = (data: any[]) => {
+    const working = data.filter(comp => comp.status === "berfungsi").length;
+    const broken = data.filter(comp => comp.status === "rusak").length;
+    const maintenance = data.filter(comp => comp.status === "maintenance").length;
+    setPsptStatusCount({ working, broken, maintenance });
+  };
+
+  // Update chart data configuration for RPL
+  const getRplChartData = () => ({
     labels: ['Berfungsi', 'Rusak', 'Maintenance'],
     datasets: [
       {
-        data: [working, broken, maintenance],
+        data: [rplStatusCount.working, rplStatusCount.broken, rplStatusCount.maintenance],
+        backgroundColor: [
+          'rgb(34, 197, 94)', // green
+          'rgb(239, 68, 68)', // red
+          'rgb(234, 179, 8)',  // yellow
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  // Similar functions for TKJ, DKV, and PSPT charts
+  const getTkjChartData = () => ({
+    labels: ['Berfungsi', 'Rusak', 'Maintenance'],
+    datasets: [
+      {
+        data: [tkjStatusCount.working, tkjStatusCount.broken, tkjStatusCount.maintenance],
+        backgroundColor: [
+          'rgb(34, 197, 94)', // green
+          'rgb(239, 68, 68)', // red
+          'rgb(234, 179, 8)',  // yellow
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const getDkvChartData = () => ({
+    labels: ['Berfungsi', 'Rusak', 'Maintenance'],
+    datasets: [
+      {
+        data: [dkvStatusCount.working, dkvStatusCount.broken, dkvStatusCount.maintenance],
+        backgroundColor: [
+          'rgb(34, 197, 94)', // green
+          'rgb(239, 68, 68)', // red
+          'rgb(234, 179, 8)',  // yellow
+        ],
+        borderWidth: 1,
+      },
+    ],
+  });
+
+  const getPsptChartData = () => ({
+    labels: ['Berfungsi', 'Rusak', 'Maintenance'],
+    datasets: [
+      {
+        data: [psptStatusCount.working, psptStatusCount.broken, psptStatusCount.maintenance],
         backgroundColor: [
           'rgb(34, 197, 94)', // green
           'rgb(239, 68, 68)', // red
@@ -87,7 +241,7 @@ export default function Dashboard() {
 
       <div className="flex-1 p-8 bg-gray-50">
         <h1 className="text-3xl font-bold mb-8">Dashboard Persediaan PC</h1>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* RPL Card */}
           <div className="bg-white p-6 rounded-lg shadow-md cursor-pointer" onClick={handleRPLClick}>
@@ -100,26 +254,26 @@ export default function Dashboard() {
             </div>
             <div className="h-48 mb-4">
               <Doughnut 
-                data={getChartData(28, 2, 1)} 
-                options={{...chartOptions, onClick: handleRPLClick}} 
+                data={getRplChartData()}
+                options={chartOptions} 
               />
             </div>
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
-                <span className="font-semibold">30 Unit</span>
+                <span className="font-semibold">{totalPC} Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-green-500" /> Berfungsi</span>
-                <span className="font-semibold text-green-500">28 Unit</span>
+                <span className="font-semibold text-green-500">{rplStatusCount.working} Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><AlertCircle className="h-4 w-4 mr-2 text-red-500" /> Rusak</span>
-                <span className="font-semibold text-red-500">2 Unit</span>
+                <span className="font-semibold text-red-500">{rplStatusCount.broken} Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><WrenchIcon className="h-4 w-4 mr-2 text-yellow-500" /> Maintenance</span>
-                <span className="font-semibold text-yellow-500">1 Unit</span>
+                <span className="font-semibold text-yellow-500">{rplStatusCount.maintenance} Unit</span>
               </div>
             </div>
           </div>
@@ -135,8 +289,8 @@ export default function Dashboard() {
             </div>
             <div className="h-48 mb-4">
               <Doughnut 
-                data={getChartData(32, 3, 2)} 
-                options={{...chartOptions, onClick: handleTKJClick}} 
+                data={getTkjChartData()}
+                options={chartOptions} 
               />
             </div>
             <div className="space-y-3">
@@ -170,8 +324,8 @@ export default function Dashboard() {
             </div>
             <div className="h-48 mb-4">
               <Doughnut 
-                data={getChartData(23, 2, 1)} 
-                options={{...chartOptions, onClick: handleDKVClick}} 
+                data={getDkvChartData()}
+                options={chartOptions} 
               />
             </div>
             <div className="space-y-3">
@@ -205,8 +359,8 @@ export default function Dashboard() {
             </div>
             <div className="h-48 mb-4">
               <Doughnut 
-                data={getChartData(25, 3, 2)} 
-                options={{...chartOptions, onClick: handlePSPTClick}} 
+                data={getPsptChartData()}
+                options={chartOptions} 
               />
             </div>
             <div className="space-y-3">

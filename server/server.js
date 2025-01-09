@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const sequelize = require('./config/database');
 const User = require('./models/user');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
+const rplRoutes = require('./routes/rplRoutes')
 
 const app = express();
 app.use(express.json());
@@ -62,13 +62,10 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // Ganti token dummy dengan JWT
-        const token = jwt.sign({ id: user.id, username: user.username }, 'admin', { expiresIn: '1h' });
-
         // Kirim response dengan format JSON
         res.status(200).json({ 
             message: 'Login successful',
-            token,
+            token: 'dummy-token', // Nanti bisa diganti dengan JWT
             user: {
                 id: user.id,
                 username: user.username,
@@ -80,5 +77,8 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Error logging in' });
     }
 });
+
+
+app.use('/api', rplRoutes);
 
 app.listen(5000, () => console.log('Server running on port 5000'));
