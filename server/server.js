@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const sequelize = require('./config/database');
 const User = require('./models/user');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
@@ -61,10 +62,13 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
+        // Ganti token dummy dengan JWT
+        const token = jwt.sign({ id: user.id, username: user.username }, 'admin', { expiresIn: '1h' });
+
         // Kirim response dengan format JSON
         res.status(200).json({ 
             message: 'Login successful',
-            token: 'dummy-token', // Nanti bisa diganti dengan JWT
+            token,
             user: {
                 id: user.id,
                 username: user.username,
