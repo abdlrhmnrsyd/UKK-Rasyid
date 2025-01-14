@@ -138,12 +138,12 @@ const LoginPage: React.FC = () => {
                 </button>
               </form>
               <p className="mt-6 text-sm text-center text-gray-400">
-                Don't have an account yet?{" "}
+                Belum Punya Akun?{" "}
                 <a
                   href="register"
                   className="text-blue-500 focus:outline-none focus:underline hover:underline"
                 >
-                  Sign up
+                  Buat Akun Dulu Bree!
                 </a>
                 .
               </p>
