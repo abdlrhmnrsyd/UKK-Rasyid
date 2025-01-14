@@ -1,6 +1,6 @@
 const Rpl = require('./../models/rplModel');
 
-// Create new Rpl
+
 const createRpl = async (req, res) => {
   try {
     const { nama_komputer, ip_address, brand, lokasi, status } = req.body;
@@ -11,7 +11,7 @@ const createRpl = async (req, res) => {
   }
 };
 
-// Get all Rpls
+
 const getRpls = async (req, res) => {
   try {
     const rpls = await Rpl.findAll();
@@ -21,7 +21,7 @@ const getRpls = async (req, res) => {
   }
 };
 
-// Get Rpl by ID
+
 const getRplById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -36,7 +36,7 @@ const getRplById = async (req, res) => {
   }
 };
 
-// Update Rpl
+
 const updateRpl = async (req, res) => {
   const { id } = req.params;
   const { nama_komputer, ip_address, brand, lokasi, status } = req.body;
