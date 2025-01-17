@@ -18,7 +18,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   );
 }
 
-// SidebarItem component
+
 interface SidebarItemProps {
   icon: React.ReactNode;
   text: string;
