@@ -143,7 +143,7 @@ const LoginPage: React.FC = () => {
                   href="register"
                   className="text-blue-500 focus:outline-none focus:underline hover:underline"
                 >
-                  Buat Akun Dulu Bree!
+                  Buat Akun Dulu Bree !
                 </a>
                 .
               </p>

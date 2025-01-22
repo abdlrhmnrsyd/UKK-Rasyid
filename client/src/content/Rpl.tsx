@@ -247,7 +247,9 @@ export default function Rpl() {
                   <td className="border px-4 py-2">{rpl.ip_address.toUpperCase()}</td>
                   <td className="border px-4 py-2">{rpl.brand.toUpperCase()}</td>
                   <td className="border px-4 py-2">{rpl.lokasi.toUpperCase()}</td>
-                  <td className="border px-4 py-2">{rpl.status.toUpperCase()}</td>
+                  <td className={`border px-4 py-2 ${rpl.status === 'rusak' ? 'bg-red-500 bg-opacity-75' : rpl.status === 'berfungsi' ? 'bg-green-500 bg-opacity-75' : rpl.status === 'maintenance' ? 'bg-yellow-500 bg-opacity-75' : ''}`}>
+                    {rpl.status.toUpperCase()}
+                  </td>
                   <td className="border px-4 py-2">
                     <button
                       onClick={() => handleEdit(rpl)}
