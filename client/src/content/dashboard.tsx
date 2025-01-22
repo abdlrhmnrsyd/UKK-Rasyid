@@ -296,19 +296,19 @@ export default function Dashboard() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
-                <span className="font-semibold">35 Unit</span>
+                <span className="font-semibold">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-green-500" /> Berfungsi</span>
-                <span className="font-semibold text-green-500">32 Unit</span>
+                <span className="font-semibold text-green-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><AlertCircle className="h-4 w-4 mr-2 text-red-500" /> Rusak</span>
-                <span className="font-semibold text-red-500">3 Unit</span>
+                <span className="font-semibold text-red-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><WrenchIcon className="h-4 w-4 mr-2 text-yellow-500" /> Maintenance</span>
-                <span className="font-semibold text-yellow-500">2 Unit</span>
+                <span className="font-semibold text-yellow-500">0 Unit</span>
               </div>
             </div>
           </div>
@@ -331,19 +331,19 @@ export default function Dashboard() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
-                <span className="font-semibold">25 Unit</span>
+                <span className="font-semibold">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-green-500" /> Berfungsi</span>
-                <span className="font-semibold text-green-500">23 Unit</span>
+                <span className="font-semibold text-green-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><AlertCircle className="h-4 w-4 mr-2 text-red-500" /> Rusak</span>
-                <span className="font-semibold text-red-500">2 Unit</span>
+                <span className="font-semibold text-red-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><WrenchIcon className="h-4 w-4 mr-2 text-yellow-500" /> Maintenance</span>
-                <span className="font-semibold text-yellow-500">1 Unit</span>
+                <span className="font-semibold text-yellow-500">0 Unit</span>
               </div>
             </div>
           </div>
@@ -366,19 +366,19 @@ export default function Dashboard() {
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><Monitor className="h-4 w-4 mr-2" /> Total PC</span>
-                <span className="font-semibold">28 Unit</span>
+                <span className="font-semibold">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><CheckCircle2 className="h-4 w-4 mr-2 text-green-500" /> Berfungsi</span>
-                <span className="font-semibold text-green-500">25 Unit</span>
+                <span className="font-semibold text-green-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><AlertCircle className="h-4 w-4 mr-2 text-red-500" /> Rusak</span>
-                <span className="font-semibold text-red-500">3 Unit</span>
+                <span className="font-semibold text-red-500">0 Unit</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center"><WrenchIcon className="h-4 w-4 mr-2 text-yellow-500" /> Maintenance</span>
-                <span className="font-semibold text-yellow-500">2 Unit</span>
+                <span className="font-semibold text-yellow-500">0 Unit</span>
               </div>
             </div>
           </div>
