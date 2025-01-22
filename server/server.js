@@ -11,11 +11,11 @@ app.use(cors());
 
 sequelize.sync().then(() => console.log('Database synced')).catch(console.error);
 
-// Register Endpoint
+
 app.post('/register', async (req, res) => {
     const { name, username, password } = req.body;
 
-    // Log untuk debug
+    
     console.log('Request body received:', req.body);
 
     if (!name || !username || !password) {
@@ -36,11 +36,11 @@ app.post('/register', async (req, res) => {
 
 
 
-// Login Endpoint
+
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     
-    // Tambah logging
+
     console.log('Login attempt for username:', username);
 
     if (!username || !password) {
@@ -62,10 +62,9 @@ app.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid password' });
         }
 
-        // Kirim response dengan format JSON
         res.status(200).json({ 
             message: 'Login successful',
-            token: 'dummy-token', // Nanti bisa diganti dengan JWT
+            token: 'dummy-token', 
             user: {
                 id: user.id,
                 username: user.username,

@@ -139,7 +139,7 @@ export default function Rpl() {
 
         {/* Popup Form Input */}
         {isFormVisible && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
             <div className="bg-white rounded-lg p-4 w-full max-w-lg">
               <button
                 onClick={toggleFormVisibility}
@@ -227,9 +227,9 @@ export default function Rpl() {
 
         {/* Tabel untuk Menampilkan Data RPL */}
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-200">
-            <thead>
-              <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+          <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead className="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+              <tr>
                 <th className="border px-4 py-2">No</th>
                 <th className="border px-4 py-2">Nama Komputer</th>
                 <th className="border px-4 py-2">IP Address</th>
@@ -239,31 +239,31 @@ export default function Rpl() {
                 <th className="border px-4 py-2">Aksi</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 text-sm font-light">
+            <tbody className="text-gray-700 text-sm font-medium">
               {rplData.map((rpl, index) => (
-                <tr key={rpl.id} className="border-b hover:bg-gray-100">
-                  <td className="border px-4 py-2">{index + 1}</td>
-                  <td className="border px-4 py-2">{rpl.nama_komputer.toUpperCase()}</td>
-                  <td className="border px-4 py-2">{rpl.ip_address.toUpperCase()}</td>
-                  <td className="border px-4 py-2">{rpl.brand.toUpperCase()}</td>
-                  <td className="border px-4 py-2">{rpl.lokasi.toUpperCase()}</td>
-                  <td className={`border px-4 py-2 ${rpl.status === 'rusak' ? 'bg-red-500 bg-opacity-75' : rpl.status === 'berfungsi' ? 'bg-green-500 bg-opacity-75' : rpl.status === 'maintenance' ? 'bg-yellow-500 bg-opacity-75' : ''}`}>
-                    {rpl.status.toUpperCase()}
+                <tr key={rpl.id} className="border-b hover:bg-gray-100 transition duration-200 transform hover:scale-105">
+                  <td className="border px-4 py-3">{index + 1}</td>
+                  <td className="border px-4 py-3">{rpl.nama_komputer.toUpperCase()}</td>
+                  <td className="border px-4 py-3">{rpl.ip_address.toUpperCase()}</td>
+                  <td className="border px-4 py-3">{rpl.brand.toUpperCase()}</td>
+                  <td className="border px-4 py-3">{rpl.lokasi.toUpperCase()}</td>
+                  <td className="border px-4 py-3">
+                    <span className={`${rpl.status === 'rusak' ? 'text-red-500' : rpl.status === 'berfungsi' ? 'text-green-500' : rpl.status === 'maintenance' ? 'text-yellow-500' : ''}`}>
+                      {rpl.status.toUpperCase()}
+                    </span>
                   </td>
-                  <td className="border px-4 py-2">
+                  <td className="border px-4 py-3">
                     <button
                       onClick={() => handleEdit(rpl)}
                       className="text-blue-500 hover:underline"
                     >
                       <Edit className="h-5 w-5 mr-1" />
-                    
                     </button>
                     <button
                       onClick={() => handleDelete(rpl.id)}
                       className="text-red-500 hover:underline ml-2"
                     >
                       <Trash className="h-5 w-5 mr-1" />
-                      
                     </button>
                   </td>
                 </tr>

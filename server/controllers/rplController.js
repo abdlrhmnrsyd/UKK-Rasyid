@@ -58,7 +58,7 @@ const updateRpl = async (req, res) => {
   }
 };
 
-// Delete Rpl
+
 const deleteRpl = async (req, res) => {
   const { id } = req.params;
   try {
